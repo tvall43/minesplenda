@@ -24,9 +24,30 @@ client.on("ready", async =>{
 })
 
 client.on('message', message => {
-  if (message.content === 'hellominecraft') {
-    bot.chat("helloworld")
+  if (message.content === 'timeday') {
+    bot.chat("/time set day")
   }
+
+  if (message.content === 'timenight') {
+    bot.chat("/time set night")
+  }
+
+  if (message.content === 'kick') {
+    bot.chat("/kick")
+  }
+
+  if (message.content === 'ban') {
+    bot.chat("/ban")
+  }
+
+  if (message.content === 'teleport') {
+    bot.chat("/tp")
+  }
+
+  if (message.content === 'say') {
+    bot.chat("/say hello")
+  }
+
 });
 
 client.login('token')
