@@ -1,0 +1,7 @@
+terrible bot written for splenda to handle some admin stuff in vanilla minecraft
+
+the crappy idea:
+lower level admins on the server dont get op, but get permission to chat with this bot. by sending messages to bot, bot will react by running whatever command.
+current idea is to have the bot present in discord, and react to messages in an admin only room. 
+
+my code is also crap
