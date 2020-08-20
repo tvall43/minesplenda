@@ -23,4 +23,10 @@ client.on("ready", async =>{
   console.log("discord")
 })
 
+client.on('message', message => {
+  if (message.content === 'hellominecraft') {
+    bot.chat("helloworld")
+  }
+});
+
 client.login('token')
