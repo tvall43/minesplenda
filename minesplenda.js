@@ -31,6 +31,13 @@ bot.on('error', err => console.log(err))
 
 client.on("ready", async =>{
   console.log("discord")
+  client.user.setPresence({
+        status: "online",  //You can show online, idle....
+        game: {
+            name: "Minecraft, duh",  //The message shown
+            type: "PLAYING:" //PLAYING: WATCHING: LISTENING: STREAMING:
+        }
+  });
 })
 
 client.on('message', message => {
@@ -39,12 +46,20 @@ client.on('message', message => {
 
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
-
   if (!args.length) {
     return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 	}
-  if (commands[command] != undefined) {
-    bot.chat(`/${commands[command]} ${args}`);
+
+  if (command === 'minesplenda') {
+    message.channel.send(`im alive`);
+  } else {
+    if (!message.member.roles.cache.some(r=>["Administrator", "Moderator"].includes(r.name))) {
+      return message.reply("Sorry, you don't have permissions to use this!");
+    }
+
+    if (commands[command] != undefined) {
+      bot.chat(`/${commands[command]} ${args}`);
+    }
   }
 });
 
