@@ -23,6 +23,13 @@ bot.on('error', err => console.log(err))
 
 client.on("ready", async =>{
   console.log("discord")
+  client.user.setPresence({
+        status: "online",  //You can show online, idle....
+        game: {
+            name: "Minecraft, duh",  //The message shown
+            type: "PLAYING:" //PLAYING: WATCHING: LISTENING: STREAMING:
+        }
+  });
 })
 
 client.on('message', message => {
@@ -56,16 +63,20 @@ client.on('message', message => {
         if (!args.length) { 
                 return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
         }
-
-        bot.chat(`/tp ${args}`);
+        const tpStuff = args.join(" ");
+        bot.chat(`/tp ` tpStuff);
   }
   else if (command === 'say') {
         if (!args.length) { 
                 return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
         }
-
-        bot.chat(`/say ${args}`);
+        const sayMessage = args.join(" ");
+        bot.chat(`/say ` + sayMessage);
   }
+  else if (command === 'minesplenda') {
+        message.channel.send(`im alive`);
+  }
+
 });
 
 client.login('token')
