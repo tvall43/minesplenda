@@ -16,8 +16,15 @@ var commands = {
   "timeset": "time set",
   "teleport": "tp",
   "kick": "kick",
+  "gamemode": "gamemode"
+};
+
+var admincommands = {
   "ban": "ban",
-  "say": "say"
+  "say": "say",
+  "pardon": "pardon",
+  "ban-ip": "ban-ip",
+  "pardon-ip": "pardon-ip"
 };
 
 bot.on('chat', function (username, message) {
@@ -55,8 +62,17 @@ client.on('message', message => {
     }
 
     if (commands[command] != undefined) {
-      bot.chat(`/${commands[command]} ${args}`);
+      const commaless = args.join(" ");
+      bot.chat(`/${commands[command]} ${commaless}`);
+    } else
+      if (admincommands[command] != undefined) {
+        if (!message.member.roles.cache.some(r=>["Administrator", "Owner"].includes(r.name))) {
+          return message.reply("Sorry, you don't have permissions to use this!");
+        }
+        const commaless = args.join(" ");
+        bot.chat(`/${admincommands[command]} ${commaless}`);
     }
+
   }
 });
 
