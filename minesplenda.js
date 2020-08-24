@@ -1,4 +1,3 @@
-
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const mineflayer = require('mineflayer');
@@ -14,36 +13,23 @@ const bot = mineflayer.createBot({
 });
 
 var commands = {
-
-
   //mod +
-  "timeset": ["time set", 1],
-  "teleport": ["tp", 1],
-  "kick": ["kick", 1],
-  "gamemode": ["gamemode", 1],
-
+  "timeset": ["time set", 2],
+  "teleport": ["tp", 2],
+  "kick": ["kick", 2],
+  "gamemode": ["gamemode", 2],
   /*admin+ stuff*/
-
-  "ban": ["ban", 2],
-  "say": ["say", 2],
-  "pardon": ["pardon", 2],
-  "ban-ip": ["ban-ip", 2],
-  "pardon-ip": ["pardon-ip", 2]
+  "ban": ["ban", 3],
+  "say": ["say", 3],
+  "pardon": ["pardon", 3],
+  "ban-ip": ["ban-ip", 3],
+  "pardon-ip": ["pardon-ip", 3],
+  //owner?
+  "op": ["op", 6]
 };
 
-
-/* real roles, add before mineflayer update. should be in correct order
-
-Server Owner
-Division leader (MC:VS)
-Manager (MC:VS)
-Administrator (MC:VS)
-Moderator (MC:VS)
-Developer (MC:VS)
-
-*/
-
-var lvl_names = ["everyone", "Moderator", "Administrator", "Owner"];
+//var lvl_names = ["everyone", "Moderator", "Administrator", "Owner"];
+var lvl_names = ["everyone", "Developer (MC:VS)", "Moderator (MC:VS)", "Administrator (MC:VS)", "Manager (MC:VS)", "Division leader (MC:VS)", "Server Owner"];
 
 bot.on('chat', function (username, message) {
   if (username === bot.username) return;
