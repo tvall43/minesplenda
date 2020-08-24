@@ -4,13 +4,14 @@ const mineflayer = require('mineflayer');
 //const config = require('./config.json');
 
 var prefix = "!";
-const bot = mineflayer.createBot({
+
+/*const bot = mineflayer.createBot({
   host: '127.0.0.1', // optional
   port: 25577,       // optional
   username: 'user@gmail.com', // email and password are required only for
   password: 'N0t4R3aLpA$$',          // online-mode=true servers
   version: '1.16.1'                 // false corresponds to auto version detection (that's the default), put for example "1.8.8" if you need a specific version
-});
+})*/
 
 var commands = {
   //mod +
@@ -30,7 +31,7 @@ var commands = {
 
 //var lvl_names = ["everyone", "Moderator", "Administrator", "Owner"];
 var lvl_names = ["everyone", "Developer (MC:VS)", "Moderator (MC:VS)", "Administrator (MC:VS)", "Manager (MC:VS)", "Division leader (MC:VS)", "Server Owner"];
-
+/*
 bot.on('chat', function (username, message) {
   if (username === bot.username) return;
   bot.chat(message)
@@ -39,6 +40,11 @@ bot.on('chat', function (username, message) {
 // Log errors and kick reasons:
 bot.on('kicked', (reason, loggedIn) => console.log(reason, loggedIn));
 bot.on('error', err => console.log(err));
+*/
+//connect() {
+this.mcchatProc = require("child_process").spawn('python3', ['-u', '../src/mcchat2/mcchat2.py', '127.0.0.1:25564', 'user@gmail.com', 'N0t4R3aLpA$$']);
+console.log('mcchat child');
+//}
 
 client.on("ready", async =>{
   console.log("discord");
@@ -72,7 +78,8 @@ client.on('message', message => {
       } else
       {
         var commaless = args.join(" ");
-        bot.chat(`/${commands[command][0]} ${commaless}`);
+        //bot.chat(`/${commands[command][0]} ${commaless}`);
+        this.mcchatProc.stdin.write(`/${commands[command][0]} ${commaless}` + "\n");
       }
     }
   }
