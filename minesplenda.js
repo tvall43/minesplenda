@@ -1,3 +1,4 @@
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const mineflayer = require('mineflayer');
@@ -13,19 +14,36 @@ const bot = mineflayer.createBot({
 });
 
 var commands = {
-  "timeset": "time set",
-  "teleport": "tp",
-  "kick": "kick",
-  "gamemode": "gamemode"
+
+
+  //mod +
+  "timeset": ["time set", 1],
+  "teleport": ["tp", 1],
+  "kick": ["kick", 1],
+  "gamemode": ["gamemode", 1],
+
+  /*admin+ stuff*/
+
+  "ban": ["ban", 2],
+  "say": ["say", 2],
+  "pardon": ["pardon", 2],
+  "ban-ip": ["ban-ip", 2],
+  "pardon-ip": ["pardon-ip", 2]
 };
 
-var admincommands = {
-  "ban": "ban",
-  "say": "say",
-  "pardon": "pardon",
-  "ban-ip": "ban-ip",
-  "pardon-ip": "pardon-ip"
-};
+
+/* real roles, add before mineflayer update. should be in correct order
+
+Server Owner
+Division leader (MC:VS)
+Manager (MC:VS)
+Administrator (MC:VS)
+Moderator (MC:VS)
+Developer (MC:VS)
+
+*/
+
+var lvl_names = ["everyone", "Moderator", "Administrator", "Owner"];
 
 bot.on('chat', function (username, message) {
   if (username === bot.username) return;
@@ -57,22 +75,20 @@ client.on('message', message => {
   if (command === 'minesplenda') {
     message.channel.send(`im alive`);
   } else {
-    if (!message.member.roles.cache.some(r=>["Administrator", "Moderator"].includes(r.name))) {
-      return message.reply("Sorry, you don't have permissions to use this!");
-    }
+    var cache = message.member.roles.cache;
 
     if (commands[command] != undefined) {
-      const commaless = args.join(" ");
-      bot.chat(`/${commands[command]} ${commaless}`);
-    } else
-      if (admincommands[command] != undefined) {
-        if (!message.member.roles.cache.some(r=>["Administrator", "Owner"].includes(r.name))) {
-          return message.reply("Sorry, you don't have permissions to use this!");
-        }
-        const commaless = args.join(" ");
-        bot.chat(`/${admincommands[command]} ${commaless}`);
-    }
+    /* "Cuts" the `lvl_names` array from `commands[command][1]` to the end. Example: For the "ban" command, the returned array would be `["Administrator", "Owner"]`. */
+      var tmp_lvl = lvl_names.slice(commands[command][1]);
 
+      if (!cache.some(r => tmp_lvl.includes(r.name))) {
+        return message.reply("Sorry, you don't have permissions to use this!");
+      } else
+      {
+        var commaless = args.join(" ");
+        bot.chat(`/${commands[command][0]} ${commaless}`);
+      }
+    }
   }
 });
 
