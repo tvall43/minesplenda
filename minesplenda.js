@@ -59,7 +59,7 @@ client.on("ready", async =>{
 
 client.on('message', message => {
 
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.content.startsWith(prefix) || message.author.bot || message.guild === null) return;
 
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
