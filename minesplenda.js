@@ -74,7 +74,9 @@ client.on('message', message => {
     if(!message.member.roles.cache.some(r=>["Developer (MC:VS)"].includes(r.name)))
       return message.reply("Sorry, you don't have permissions to use this!")
     var commaless = args.join(" ");
-    this.mcchatProc.stdin.write(`/gamemode ${commaless}` + "\n");
+    this.mcchatProc.stdin.write(`/gamemode ${args[0]} ${args[1]}` + "\n");
+    console.log(`${message.author.tag} /gamemode ${commaless}`);
+
   } else {
     var cache = message.member.roles.cache;
 
