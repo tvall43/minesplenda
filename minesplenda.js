@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const mineflayer = require('mineflayer');
+//const mineflayer = require('mineflayer');
 //const config = require('./config.json');
 
 var prefix = "!";
@@ -18,19 +18,22 @@ var commands = {
   "timeset": ["time set", 2],
   "teleport": ["tp", 2],
   "kick": ["kick", 2],
-  "gamemode": ["gamemode", 2],
+  "survival": ["gamemode survival", 2],
+  "spectate": ["gamemode spectator", 2],
   /*admin+ stuff*/
   "ban": ["ban", 3],
   "say": ["say", 3],
   "pardon": ["pardon", 3],
   "ban-ip": ["ban-ip", 3],
   "pardon-ip": ["pardon-ip", 3],
+  "creative": ["gamemode creative", 5],
+  //"gamemode": ["gamemode", 6],
   //owner?
-  "op": ["op", 6]
+  "op": ["op", 7]
 };
 
 //var lvl_names = ["everyone", "Moderator", "Administrator", "Owner"];
-var lvl_names = ["everyone", "Developer (MC:VS)", "Moderator (MC:VS)", "Administrator (MC:VS)", "Manager (MC:VS)", "Division leader (MC:VS)", "Server Owner"];
+var lvl_names = ["everyone", "Developer (MC:VS)", "Moderator (MC:VS)", "Administrator (MC:VS)", "Manager (MC:VS)", "Division leader (MC:VS)", "Community Leader", "Server Owner"];
 /*
 bot.on('chat', function (username, message) {
   if (username === bot.username) return;
@@ -42,7 +45,7 @@ bot.on('kicked', (reason, loggedIn) => console.log(reason, loggedIn));
 bot.on('error', err => console.log(err));
 */
 //connect() {
-this.mcchatProc = require("child_process").spawn('python3', ['-u', '../src/mcchat2/mcchat2.py', '127.0.0.1:25564', 'user@gmail.com', 'N0t4R3aLpA$$']);
+this.mcchatProc = require("child_process").spawn('python3', ['-u', '../src/mcchat2/mcchat2.py', '127.0.0.1:25577', 'user@gmail.com', 'N0t4R3aLpA$$']);
 console.log('mcchat child');
 //}
 
@@ -66,6 +69,12 @@ client.on('message', message => {
 
   if (command === 'minesplenda') {
     message.channel.send(`im alive`);
+  }
+  else if (command === 'gamemode') {
+    if(!message.member.roles.cache.some(r=>["Developer (MC:VS)"].includes(r.name)))
+      return message.reply("Sorry, you don't have permissions to use this!")
+    var commaless = args.join(" ");
+    this.mcchatProc.stdin.write(`/gamemode ${commaless}` + "\n");
   } else {
     var cache = message.member.roles.cache;
 
