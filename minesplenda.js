@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-//const config = require('./config.json');
+const config = require('./config.json');
 
-var prefix = "!";
+var prefix = config.prefix;
 
 var commands = {
   //mod +
@@ -27,7 +27,7 @@ var commands = {
 var lvl_names = ["everyone", "Developer (MC:VS)", "Moderator (MC:VS)", "Administrator (MC:VS)", "Manager (MC:VS)", "Division leader (MC:VS)", "Community Leader", "Server Owner"];
 
 //connect() {
-this.mcchatProc = require("child_process").spawn('python3', ['-u', '../src/mcchat2/mcchat2.py', '127.0.0.1:25577', 'user@gmail.com', 'N0t4R3aLpA$$']);
+this.mcchatProc = require("child_process").spawn('python3', ['-u', '../src/mcchat2/mcchat2.py', config.mcserver, config.mcuser, config.mcpass]);
 console.log('mcchat child');
 //}
 
@@ -78,4 +78,4 @@ client.on('message', message => {
   }
 });
 
-client.login('token')
+client.login(config.token)
