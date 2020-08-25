@@ -23,9 +23,9 @@ var commands = {
   /*admin+ stuff*/
   "ban": ["ban", 3],
   "say": ["say", 3],
-  "pardon": ["pardon", 3],
+  "pardon": ["pardon", 4],
   "ban-ip": ["ban-ip", 3],
-  "pardon-ip": ["pardon-ip", 3],
+  "pardon-ip": ["pardon-ip", 4],
   "creative": ["gamemode creative", 5],
   //"gamemode": ["gamemode", 6],
   //owner?
@@ -89,6 +89,7 @@ client.on('message', message => {
         var commaless = args.join(" ");
         //bot.chat(`/${commands[command][0]} ${commaless}`);
         this.mcchatProc.stdin.write(`/${commands[command][0]} ${commaless}` + "\n");
+        console.log(`${message.author.tag} /${commands[command][0]} ${commaless}`);
       }
     }
   }

@@ -5,3 +5,19 @@ lower level admins on the server dont get op, but get permission to chat with th
 current idea is to have the bot present in discord, and react to messages in an admin only room. 
 
 my code is also crap
+
+what acutally ended up being written:
+uses mcchat2 to communicate with the server. bot passes messages to stdin of the mcchat process
+level of permisions based on user roles in discord
+thanks to Alvarito050506 for cleanup and making my spaghetti code much less spaghetti-like
+
+how to use:
+if youre crazy enough to use this yourself, i didn't make it easy, but i didnt make it intenitonally hard.
+
+clone repo
+npm install discord.js
+have a copy of mcchat2 in ../src/mcchat2/ (or edit the line with that)
+change server, email, and pass in the this.mcchatProc line
+replace token with discord bot token at last line
+node minesplenda.js
+cross fingers?
