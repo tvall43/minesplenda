@@ -31,6 +31,11 @@ this.mcchatProc = require("child_process").spawn('python3', ['-u', '../src/mccha
 console.log('mcchat child');
 //}
 
+this.mcchatProc.stdout.on('data', (data) => {
+  console.log(`mcchat: ${data}`);
+});
+
+
 client.on("ready", async =>{
   console.log("discord");
   client.user.setPresence({
