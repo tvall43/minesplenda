@@ -33,8 +33,10 @@ console.log('mcchat child');
 
 this.mcchatProc.stdout.on('data', (data) => {
   console.log(`mcchat: ${data}`);
+  if (data.indexOf('Players online:') >= 0) {
+    this.mcchatProc.stdin.write(`/gamemode spectator minesplenda\n`);
+  }
 });
-
 
 client.on("ready", async =>{
   console.log("discord");
