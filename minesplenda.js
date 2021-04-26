@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
+const cron = require('cron');
 
 var prefix = config.prefix;
 
@@ -38,12 +39,19 @@ this.mcchatProc.stdout.on('data', (data) => {
   }
 });
 
+let scheduledMessage = new cron.CronJob('0 15 * * * *', () => {
+  this.mcchatProc.stdin.write(`/tellraw @a "Check out our website!"\n`);
+  this.mcchatProc.stdin.write(`/tellraw @a "www.asshatgaming.com"\n`);
+  console.log("fired ad");
+});
+
 client.on("ready", async =>{
   console.log("discord");
   client.user.setPresence({
         status: "online",  //You can show online, idle....
   });
   client.user.setActivity('Minecraft, duh', { type: 'PLAYING' });
+  scheduledMessage.start();
 });
 
 client.on('message', message => {
@@ -59,6 +67,7 @@ client.on('message', message => {
   if (command === 'minesplenda') {
     message.channel.send(`im alive`);
   }
+
   else if (command === 'gamemode') {
     if(!message.member.roles.cache.some(r=>["Developer (MC:VS)"].includes(r.name)))
       return message.reply("Sorry, you don't have permissions to use this!")
