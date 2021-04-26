@@ -39,9 +39,15 @@ this.mcchatProc.stdout.on('data', (data) => {
   }
 });
 
-let scheduledMessage = new cron.CronJob('0 15 * * * *', () => {
+let websiteAd = new cron.CronJob('0 22 * * * *', () => {
   this.mcchatProc.stdin.write(`/tellraw @a "Check out our website!"\n`);
   this.mcchatProc.stdin.write(`/tellraw @a "www.asshatgaming.com"\n`);
+  console.log("fired ad");
+});
+
+let discordAd = new cron.CronJob('0 18 * * * *', () => {
+  this.mcchatProc.stdin.write(`/tellraw @a "Chat with us on Discord!"\n`);
+  this.mcchatProc.stdin.write(`/tellraw @a "discord.asshatgaming.com"\n`);
   console.log("fired ad");
 });
 
@@ -51,7 +57,8 @@ client.on("ready", async =>{
         status: "online",  //You can show online, idle....
   });
   client.user.setActivity('Minecraft, duh', { type: 'PLAYING' });
-  scheduledMessage.start();
+  discordAd.start();
+  websiteAd.start()
 });
 
 client.on('message', message => {
