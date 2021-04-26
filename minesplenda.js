@@ -27,7 +27,7 @@ var commands = {
 var lvl_names = ["everyone", "Developer (MC:VS)", "Moderator (MC:VS)", "Administrator (MC:VS)", "Manager (MC:VS)", "Division leader (MC:VS)", "Community Leader", "Server Owner"];
 
 //connect() {
-this.mcchatProc = require("child_process").spawn('python3', ['-u', '../src/mcchat2/mcchat2.py', config.mcserver, config.mcuser, config.mcpass]);
+this.mcchatProc = require("child_process").spawn('python3', ['-u', config.mcchatpath, config.mcserver, config.mcuser, config.mcpass]);
 console.log('mcchat child');
 //}
 

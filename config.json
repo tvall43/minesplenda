@@ -3,6 +3,7 @@
 	"token": "your-token-goes-here",
 	"mcuser": "user@gmail.com",
 	"mcpass": "N0t4R3aLpA$$",
-	"mcserver": "127.0.0.1:25577"
+	"mcserver": "127.0.0.1:25577",
+	"mcchatpath": "../src/mcchat2/mcchat2.py"
 }
 
