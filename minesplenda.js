@@ -39,13 +39,13 @@ this.mcchatProc.stdout.on('data', (data) => {
   }
 });
 
-let websiteAd = new cron.CronJob('0 22 * * * *', () => {
+let websiteAd = new cron.CronJob('0 */22 * * * *', () => {
   this.mcchatProc.stdin.write(`/tellraw @a "Check out our website!"\n`);
   this.mcchatProc.stdin.write(`/tellraw @a "www.asshatgaming.com"\n`);
   console.log("fired ad");
 });
 
-let discordAd = new cron.CronJob('0 18 * * * *', () => {
+let discordAd = new cron.CronJob('0 */18 * * * *', () => {
   this.mcchatProc.stdin.write(`/tellraw @a "Chat with us on Discord!"\n`);
   this.mcchatProc.stdin.write(`/tellraw @a "discord.asshatgaming.com"\n`);
   console.log("fired ad");
