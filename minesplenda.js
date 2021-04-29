@@ -1,8 +1,10 @@
+
+const { Client, Intents, MessageAttachment } = require('discord.js');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 const cron = require('cron');
-
+var fs = require('fs')
 var prefix = config.prefix;
 
 var commands = {
@@ -34,6 +36,10 @@ console.log('mcchat child');
 
 this.mcchatProc.stdout.on('data', (data) => {
   console.log(`mcchat: ${data}`);
+  var logtext = `{data}`
+  fs.appendFile('log.txt', data, (err) => {
+    if (err) throw err;
+  });
   if (data.indexOf('Players online:') >= 0) {
     this.mcchatProc.stdin.write(`/gamemode spectator minesplenda\n`);
   }
@@ -81,7 +87,13 @@ client.on('message', message => {
     var commaless = args.join(" ");
     this.mcchatProc.stdin.write(`/gamemode ${args[0]} ${args[1]}` + "\n");
     console.log(`${message.author.tag} /gamemode ${commaless}`);
-
+  }
+  else if (command === 'uploadlog') {
+    if(!message.member.roles.cache.some(r=>["Developer (MC:VS)"].includes(r.name)))
+      return message.reply("Sorry, you don't have permissions to use this!")
+    const attachment = new MessageAttachment('log.txt');
+    message.channel.send(`${message.author},`, attachment);
+//    message.reply("comingsoon")
   } else {
     var cache = message.member.roles.cache;
 
