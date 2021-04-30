@@ -6,4 +6,3 @@
 	"mcserver": "127.0.0.1:25577",
 	"mcchatpath": "../src/mcchat2/mcchat2.py"
 }
-
